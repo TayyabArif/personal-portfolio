@@ -56,7 +56,9 @@ const Contact = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('/api/contact', {
+      // Use the correct API endpoint for both development and production
+      const apiUrl = import.meta.env.DEV ? '/api/contact' : '/api/contact';
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
