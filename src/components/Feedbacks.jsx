@@ -17,12 +17,14 @@ const FeedbackCard = ({
 }) => (
   <motion.div
     variants={fadeIn("", "spring", index * 0.5, 0.75)}
-    className='bg-black-200 p-10 rounded-3xl xs:w-[320px] w-full'
+    className='bg-black-200 p-10 rounded-3xl xs:w-[400px] w-full flex-shrink-0 mx-4 flex flex-col h-full'
   >
     <p className='text-white font-black text-[48px]'>"</p>
 
-    <div className='mt-1'>
-      <p className='text-white tracking-wider text-[18px]'>{testimonial}</p>
+    <div className='mt-1 flex-1 flex flex-col'>
+      <div className='flex-1'>
+        <p className='text-white tracking-wider text-[18px] leading-relaxed'>{testimonial}</p>
+      </div>
 
       {/* Project Screenshot */}
       {screenshot && (
@@ -36,7 +38,7 @@ const FeedbackCard = ({
         </div>
       )}
 
-      <div className='mt-7 flex justify-between items-center gap-1'>
+      <div className='mt-auto pt-4 flex justify-between items-center gap-1'>
         <div className='flex-1 flex flex-col'>
           <p className='text-white font-medium text-[16px]'>
             <span className='blue-text-gradient'>@</span> {name}
@@ -45,12 +47,6 @@ const FeedbackCard = ({
             {designation} of {company}
           </p>
         </div>
-
-        <img
-          src={image}
-          alt={`feedback_by-${name}`}
-          className='w-16 h-16 rounded-full object-cover border-2 border-secondary'
-        />
       </div>
     </div>
   </motion.div>
@@ -68,11 +64,48 @@ const Feedbacks = () => {
         </motion.div>
       </div>
       
-      <div className={`-mt-20 pb-14 ${styles.paddingX} flex flex-wrap gap-7`}>
-        {testimonials.map((testimonial, index) => (
-          <FeedbackCard key={testimonial.name} index={index} {...testimonial} />
-        ))}
+      {/* Testimonials Auto-Slider */}
+      <div className={`-mt-20 pb-14 ${styles.paddingX} relative overflow-hidden`}>
+        <div className='flex gap-8 testimonials-slider items-stretch'>
+          {testimonials.concat(testimonials).map((testimonial, index) => (
+            <div key={`testimonial-${index}`} className='flex-shrink-0 flex'>
+              <FeedbackCard index={index} {...testimonial} />
+            </div>
+          ))}
+        </div>
       </div>
+
+      {/* Custom CSS for testimonials slider */}
+      <style jsx>{`
+        .testimonials-slider {
+          animation: slide 25s linear infinite;
+          will-change: transform;
+        }
+        
+        .testimonials-slider:hover {
+          animation-play-state: paused;
+        }
+        
+        @keyframes slide {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-${testimonials.length * 360}px);
+          }
+        }
+        
+        @media (max-width: 768px) {
+          @keyframes slide {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-${testimonials.length * 300}px);
+            }
+          }
+        }
+      `}</style>
     </div>
   );
 };

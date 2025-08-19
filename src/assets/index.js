@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import backend from "./backend.png";
 import creator from "./creator.png";
 import mobile from "./mobile.png";
@@ -68,6 +67,12 @@ import ps2 from "./ps2.png";
 import ps3 from "./ps3.png";
 import ps4 from "./ps4.png";
 import ps5 from "./ps5.png";
+import tm1 from "./tm1.png";
+import tm2 from "./tm2.png";
+import tm3 from "./tm3.png";
+import tm4 from "./tm4.png";
+import tm5 from "./tm5.png";
+import logo from "./logo.jpeg";
 
 
 export {
@@ -137,5 +142,10 @@ export {
   ps2,
   ps3,
   ps4,
-  ps5
+  ps5,
+  tm1,
+  tm2,
+  tm3,
+  tm4,
+  tm5
 };

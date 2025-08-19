@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
 
 import { styles } from "../styles";
 import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../utils/motion";
+import Modal from "./Modal";
 
 const Contact = () => {
   const formRef = useRef();
@@ -16,6 +16,12 @@ const Contact = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [modal, setModal] = useState({
+    isOpen: false,
+    type: 'info',
+    message: '',
+    title: ''
+  });
 
   const handleChange = (e) => {
     const { target } = e;
@@ -27,41 +33,71 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const showModal = (type, message, title = '') => {
+    setModal({
+      isOpen: true,
+      type,
+      message,
+      title
+    });
+  };
+
+  const closeModal = () => {
+    setModal({
+      isOpen: false,
+      type: 'info',
+      message: '',
+      title: ''
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    emailjs
-      .send(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-        {
-          from_name: form.name,
-          to_name: "Muhammad Tayyab",
-          from_email: form.email,
-          to_email: "tayyab.dev12@gmail.com",
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
           message: form.message,
-        },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
-      )
-      .then(
-        () => {
-          setLoading(false);
-          alert("Thank you. I will get back to you as soon as possible.");
+        }),
+      });
 
-          setForm({
-            name: "",
-            email: "",
-            message: "",
-          });
-        },
-        (error) => {
-          setLoading(false);
-          console.error(error);
+      const data = await response.json();
 
-          alert("Ahh, something went wrong. Please try again.");
-        }
+      if (data.success) {
+        showModal(
+          'success',
+          "Thank you for your message! I will get back to you as soon as possible.",
+          "Message Sent Successfully!"
+        );
+        setForm({
+          name: "",
+          email: "",
+          message: "",
+        });
+      } else {
+        showModal(
+          'error',
+          data.message || "Something went wrong. Please try again.",
+          "Submission Failed"
+        );
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      showModal(
+        'error',
+        "Network error. Please check your connection and try again.",
+        "Connection Error"
       );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -89,6 +125,7 @@ const Contact = () => {
               onChange={handleChange}
               placeholder="What's your good name?"
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
+              required
             />
           </label>
           <label className='flex flex-col'>
@@ -100,6 +137,7 @@ const Contact = () => {
               onChange={handleChange}
               placeholder="What's your web address?"
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
+              required
             />
           </label>
           <label className='flex flex-col'>
@@ -111,12 +149,14 @@ const Contact = () => {
               onChange={handleChange}
               placeholder='What you want to say?'
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
+              required
             />
           </label>
 
           <button
             type='submit'
-            className='bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary'
+            disabled={loading}
+            className='bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary disabled:opacity-50 disabled:cursor-not-allowed'
           >
             {loading ? "Sending..." : "Send"}
           </button>
@@ -129,6 +169,15 @@ const Contact = () => {
       >
         <EarthCanvas />
       </motion.div>
+
+      {/* Modal for success/error messages */}
+      <Modal
+        isOpen={modal.isOpen}
+        onClose={closeModal}
+        type={modal.type}
+        message={modal.message}
+        title={modal.title}
+      />
     </div>
   );
 };

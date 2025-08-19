@@ -61,7 +61,12 @@ import {
   ps2,
   ps3,
   ps4,
-  ps5
+  ps5,
+  tm1,
+  tm2,
+  tm3,
+  tm4,
+  tm5
 } from "../assets";
 
 export const navLinks = [
@@ -248,30 +253,43 @@ const experiences = [
 const testimonials = [
   {
     testimonial:
-      "Muhammad's expertise in full-stack development and AI integration helped us build a robust platform that exceeded our expectations. His technical skills and problem-solving abilities are outstanding.",
-    name: "Sarah Johnson",
+      "Our web application has evolved significantly under his guidance. Tayyab consistently demonstrates reliability and technical skill, frequently exceeding our expectations with his contributions. I would highly recommend him to any team and am excited about continuing our collaboration on future projects.",
+    name: "Rhen Kong",
     designation: "Product Manager",
-    company: "Educators Toolbox",
-    image: "https://randomuser.me/api/portraits/women/4.jpg",
-    screenshot: carrent, // Project screenshot/result image
+    company: "CA Labs",
+    screenshot: tm1,
   },
   {
     testimonial:
-      "Working with Muhammad was a game-changer for our project. His ability to handle complex backend systems while maintaining clean, scalable code is remarkable.",
-    name: "Alex Chen",
+      "Tayyab is firstly someone great to work with. Despite our demanding requirements and the complexity of our tasks, he kept his determination and creativity as a strength to make things happen. Apart of this mission, this is again an amazing journey to live together, and so surely this is not the end. Tayyab may fail but never give up, he is team !",
+    name: "Vincent",
     designation: "CTO",
-    company: "CA LABS",
-    image: "https://randomuser.me/api/portraits/men/5.jpg",
-    screenshot: jobit, // Project screenshot/result image
+    company: "Stream Matrix",
+    screenshot: tm2,
   },
   {
     testimonial:
-      "Muhammad delivered exceptional results on our AI chatbot project. His deep understanding of modern web technologies and attention to detail made all the difference.",
-    name: "Emily Rodriguez",
-    designation: "Technical Lead",
-    company: "Cherrington Media",
-    image: "https://randomuser.me/api/portraits/women/6.jpg",
-    screenshot: tripguide, // Project screenshot/result image
+      "I hired Muhammad to update and enhance a full-stack solution, and couldn't be happier with the results. He is reliable and his technical expertise is impressive.",
+    name: "Adam S.",
+    designation: "Director of IT.",
+    company: "Educators Toolbox",
+    screenshot: tm4,
+  },
+  {
+    testimonial:
+      "M.Tayyab had excellent communication from start to finish. Solved the problem I was having in a quick timeframe and also worked closely with myself to explore other avenues and was extremely knowledgeable. Highly recommended.",
+    name: "Kingston",
+    designation: "Pesonal",
+    company: "US Based",
+    screenshot: tm5,
+  },
+  {
+    testimonial:
+      "Came through for me in a pinch and got the job done with urgency. I really appreciate his willingness to take initiative and delivered a great product and exceptional professionalism and expertise in Python.",
+    name: "Logans",
+    designation: "CTO",
+    company: "US Based",
+    screenshot: tm3,
   },
 ];
 
@@ -327,6 +345,14 @@ const projects = [
         name: "vectorization",
         color: "blue-text-gradient",
       },
+      {
+        name: "python",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "aws",
+        color: "green-text-gradient",
+      },
     ],
     image: km3,
     gallery: [km2, km3, km4, km5, km6], // Multiple images for gallery
@@ -353,6 +379,14 @@ const projects = [
         name: "compliance",
         color: "blue-text-gradient",
       },
+      {
+        name: "python",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "firebase",
+        color: "orange-text-gradient",
+      },
     ],
     image: fac2,
     gallery: [fac1, fac2, fac3, fac4, fac5, fac6],
@@ -368,7 +402,7 @@ const projects = [
         color: "blue-text-gradient",
       },
       {
-        name: "nlp",
+        name: "NoVnc",
         color: "green-text-gradient",
       },
       {
@@ -376,7 +410,11 @@ const projects = [
         color: "pink-text-gradient",
       },
       {
-        name: "chatbot",
+        name: "postgresql",
+        color: "orange-text-gradient",
+      },
+      {
+        name: "Browser use agent",
         color: "blue-text-gradient",
       },
     ],
@@ -390,20 +428,24 @@ const projects = [
       "Ask Chirp connects Canadian schools and colleges with the Educators Toolbox team. Schools can sign up, add their details and website URL, and Ask Chirp will set up their account, provide a chatbot integration code, and enable an AI-powered chatbot on their site to answer student queries.",
     tags: [
       {
-        name: "rails",
+        name: "finction apps",
         color: "blue-text-gradient",
       },
       {
-        name: "react",
+        name: "nextts",
         color: "green-text-gradient",
       },
       {
-        name: "shopify",
+        name: "azure",
         color: "pink-text-gradient",
       },
       {
-        name: "stripe",
+        name: "github actions",
         color: "blue-text-gradient",
+      },
+      {
+        name: "azure",
+        color: "green-text-gradient",
       },
     ],
     image: ac1,
@@ -416,11 +458,11 @@ const projects = [
       "Prosafe is a First Aid course–focused college management system. It’s a web application that helps colleges manage students, courses, and related data, with a built-in CMS for handling frontend content and design. I provide support for their two main college websites: LIT and Prosafe.",
     tags: [
       {
-        name: "python",
+        name: "rails",
         color: "blue-text-gradient",
       },
       {
-        name: "django",
+        name: "nextjs",
         color: "green-text-gradient",
       },
       {
@@ -430,6 +472,10 @@ const projects = [
       {
         name: "docker",
         color: "blue-text-gradient",
+      },
+      {
+        name: "digital ocean",
+        color: "red-text-gradient",
       },
     ],
     image: ps1,
